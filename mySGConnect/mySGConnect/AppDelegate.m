@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RetraitViewController.h"
-#import "ViewController.h"
+#import "AccueilViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +24,7 @@
 	
 	
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-	RetraitViewController *vc = (RetraitViewController*) [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
+	AccueilViewController *vc = (AccueilViewController*) [storyboard instantiateViewControllerWithIdentifier:@"AccueilViewController"];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
 	[self.window makeKeyAndVisible];
 	[self.window.rootViewController presentViewController:self.navigationController animated:NO completion:^{

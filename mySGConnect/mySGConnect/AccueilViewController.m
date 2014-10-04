@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 teamSGAdviser. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AccueilViewController.h"
 
-@interface ViewController ()
+@interface AccueilViewController ()
 
 @end
 
-@implementation ViewController
+@implementation AccueilViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
