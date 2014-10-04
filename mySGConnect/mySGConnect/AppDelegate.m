@@ -14,9 +14,6 @@
 #import "UserManager.h"
 
 @interface AppDelegate ()
-{
-	UserManager *userManager;
-}
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -24,6 +21,7 @@
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
 @property (strong, nonatomic) NSUUID *uuid;
 @property (strong, nonatomic) NSMutableDictionary *passageDictionnary;
+
 
 @end
 
@@ -155,9 +153,7 @@
 	}];
 }
 
-- (void)getUserInformation
-{
-	userManager = [UserManager sharedInstance];
+- (void)getUserInformation{
 	
 	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
 	NSString *email = @"saez@sg.com";
