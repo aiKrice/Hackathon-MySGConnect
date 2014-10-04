@@ -16,6 +16,8 @@
 		DA27E21819E01E16006E701F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA27E21619E01E16006E701F /* LaunchScreen.xib */; };
 		DA27E22419E01E16006E701F /* mySGConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22319E01E16006E701F /* mySGConnectTests.m */; };
 		DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22E19E01E9C006E701F /* RetraitViewController.m */; };
+		DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23019E0210B006E701F /* CoreLocation.framework */; };
+		DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23219E02111006E701F /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		DA27E22319E01E16006E701F /* mySGConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mySGConnectTests.m; sourceTree = "<group>"; };
 		DA27E22D19E01E9C006E701F /* RetraitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetraitViewController.h; sourceTree = "<group>"; };
 		DA27E22E19E01E9C006E701F /* RetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitViewController.m; sourceTree = "<group>"; };
+		DA27E23019E0210B006E701F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DA27E23219E02111006E701F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */,
+				DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */,
 				CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +149,8 @@
 		DBA08AE9939945AD7F76E790 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA27E23219E02111006E701F /* CoreBluetooth.framework */,
+				DA27E23019E0210B006E701F /* CoreLocation.framework */,
 				D265F9DB97BDA2EFDE967677 /* libPods.a */,
 			);
 			name = Frameworks;

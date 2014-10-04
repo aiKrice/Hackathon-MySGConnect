@@ -13,6 +13,9 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navigationController;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLBeaconRegion *beaconRegion1;
+@property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
 
 @end
 
@@ -21,6 +24,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
+	
+	self.locationManager = [[CLLocationManager alloc] init];
+	self.locationManager.delegate = self;
+	NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
+	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+																 major:0
+																 minor:0
+															identifier:@"com.mysgconnnect"];
+	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+																 major:0
+																 minor:1
+															identifier:@"com.mysgconnnect"];
+	self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
+	self.beaconRegion1.notifyOnEntry = TRUE;
+	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
+	self.beaconRegion2.notifyOnEntry = TRUE;
+	[self.locationManager startMonitoringForRegion:self.beaconRegion1];
+	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	
 	
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -31,11 +52,6 @@
 		
 	}];
 
-	
-	
-	
-	
-	
 	return YES;
 }
 
@@ -60,5 +76,30 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+
+- (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
+	
+}
+
+- (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+	[self.locationManager startRangingBeaconsInRegion:region];
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
+	[self.navigationController pushViewController:rvc animated:YES];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+	[self.locationManager stopRangingBeaconsInRegion:region];
+	
+}
+
+- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
+{
+	
+	
+}
+
 
 @end
