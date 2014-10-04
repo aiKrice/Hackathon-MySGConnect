@@ -13,12 +13,6 @@
 #import <AFNetworking.h>
 #import "UserManager.h"
 
-#define kMajorValueBeacon1 0
-#define kMinorValueBeacon1 0
-#define kMajorValueBeacon2 0
-#define kMinorValueBeacon2 1
-#define kBeaconUUID
-
 @interface AppDelegate ()
 {
   UserManager *userManager;
@@ -30,8 +24,6 @@
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
 @property (strong, nonatomic) NSUUID *uuid;
 @property (strong, nonatomic) NSMutableDictionary *passageDictionnary;
-
-
 
 @end
 
@@ -50,12 +42,12 @@
   
   self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
 	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
-																 major:kMajorValueBeacon1
-																 minor:kMinorValueBeacon1
+																 major:0
+																 minor:0
 															identifier:@"com.mysgconnnect"];
 	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
-																 major:kMajorValueBeacon2
-																 minor:kMinorValueBeacon2
+																 major:0
+																 minor:1
 															identifier:@"com.mysgconnnect"];
 	self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion1.notifyOnEntry = TRUE;
@@ -113,8 +105,6 @@
     default:
       break;
   }
-  
-  
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
@@ -125,6 +115,17 @@
 	[self.navigationController pushViewController:rvc animated:YES];
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
 	
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+  [self.locationManager stopRangingBeaconsInRegion:region];
+  
+  CLBeaconRegion *bregion = (CLBeaconRegion*) region;
+  NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
+  NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
+  [self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
+  [self didExitRegionWithPassage:passageID];
+  [self sendLocalNotification:@"Merci d'etre venu et à bientot"];
 }
 
 - (void)sendDidEnterRequest:(CLRegion*) region {
@@ -155,21 +156,9 @@
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
   }];
-  //http://localhost:8888/ibeacon/user.php?method=login&email=saez@sg.com
-  
-  //http://10.18.197.199:8888/ibeacon/user.php?method=login&email=saez@sg.com
 }
 
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-	[self.locationManager stopRangingBeaconsInRegion:region];
 
-  CLBeaconRegion *bregion = (CLBeaconRegion*) region;
-  NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
-  NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
-  [self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
-  [self didExitRegionWithPassage:passageID];
-	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
-}
 
 - (void)didExitRegionWithPassage:(NSString*)passageID
 {
