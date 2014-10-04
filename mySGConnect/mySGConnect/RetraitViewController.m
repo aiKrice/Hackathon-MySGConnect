@@ -9,7 +9,10 @@
 #import "RetraitViewController.h"
 
 @interface RetraitViewController ()
+@property (nonatomic, strong) NSNumber *moneyEntered;
 
+
+- (IBAction)didEnterMoney:(id)sender;
 @end
 
 @implementation RetraitViewController
@@ -34,4 +37,7 @@
 }
 */
 
+- (IBAction) didEnterMoney:(id)sender {
+	
+}
 @end
