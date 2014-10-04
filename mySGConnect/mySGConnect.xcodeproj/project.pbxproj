@@ -31,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8FE1C89B19E0447200B77BB9 /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = ../UserManager.h; sourceTree = "<group>"; };
+		8FE1C89C19E0447200B77BB9 /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = ../UserManager.m; sourceTree = "<group>"; };
 		B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D265F9DB97BDA2EFDE967677 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20419E01E16006E701F /* mySGConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mySGConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +108,8 @@
 		DA27E20619E01E16006E701F /* mySGConnect */ = {
 			isa = PBXGroup;
 			children = (
+				8FE1C89B19E0447200B77BB9 /* UserManager.h */,
+				8FE1C89C19E0447200B77BB9 /* UserManager.m */,
 				DA27E20B19E01E16006E701F /* AppDelegate.h */,
 				DA27E20C19E01E16006E701F /* AppDelegate.m */,
 				DA27E20E19E01E16006E701F /* AccueilViewController.h */,
