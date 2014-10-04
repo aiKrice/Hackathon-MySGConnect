@@ -33,6 +33,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	
+  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+  }
+  
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
   
@@ -128,6 +132,12 @@
   [self sendLocalNotification:@"Merci d'etre venu et à bientot"];
 }
 
+-(void) locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
+  CLBeacon *beacon = [beacons firstObject];
+  
+  self.proximity = beacon.proximity;
+}
+
 - (void)sendDidEnterRequest:(CLRegion*) region {
   
   NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
@@ -172,7 +182,7 @@
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
 {
-  
+  notification.applicationIconBadgeNumber = 0;
 }
 
 -(void) sendLocalNotification: (NSString*) message{
