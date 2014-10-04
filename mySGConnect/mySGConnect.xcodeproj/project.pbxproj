@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FE1C89D19E04BE400B77BB9 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1C89C19E0447200B77BB9 /* UserManager.m */; };
 		CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D265F9DB97BDA2EFDE967677 /* libPods.a */; };
 		DA27E20A19E01E16006E701F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20919E01E16006E701F /* main.m */; };
 		DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20C19E01E16006E701F /* AppDelegate.m */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8FE1C89B19E0447200B77BB9 /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = ../UserManager.h; sourceTree = "<group>"; };
+		8FE1C89C19E0447200B77BB9 /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = ../UserManager.m; sourceTree = "<group>"; };
 		B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D265F9DB97BDA2EFDE967677 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20419E01E16006E701F /* mySGConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mySGConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				DAB1EDDE19E0841700B91F93 /* Images */,
+				8FE1C89B19E0447200B77BB9 /* UserManager.h */,
+				8FE1C89C19E0447200B77BB9 /* UserManager.m */,
 				DA27E20B19E01E16006E701F /* AppDelegate.h */,
 				DA27E20C19E01E16006E701F /* AppDelegate.m */,
 				DA27E20E19E01E16006E701F /* AccueilViewController.h */,
@@ -311,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FE1C89D19E04BE400B77BB9 /* UserManager.m in Sources */,
 				DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */,
 				DA27E21019E01E16006E701F /* AccueilViewController.m in Sources */,
 				DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */,
@@ -360,6 +366,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -395,6 +405,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -402,6 +413,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -428,9 +443,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Release;
 		};
@@ -438,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = mySGConnect/Info.plist;
@@ -451,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = mySGConnect/Info.plist;

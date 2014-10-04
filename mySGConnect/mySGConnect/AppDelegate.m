@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  mySGConnect
@@ -10,13 +11,19 @@
 #import "RetraitViewController.h"
 #import "AccueilViewController.h"
 #import <AFNetworking.h>
+#import "UserManager.h"
 
 @interface AppDelegate ()
+{
+  UserManager *userManager;
+}
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion1;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
+@property (strong, nonatomic) NSUUID *uuid;
+@property (strong, nonatomic) NSMutableDictionary *passageDictionnary;
 
 @end
 
@@ -33,12 +40,12 @@
     [self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
   }
   
-	NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
-	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+  self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
+	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
 																 major:0
 																 minor:0
 															identifier:@"com.mysgconnnect"];
-	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
 																 major:0
 																 minor:1
 															identifier:@"com.mysgconnnect"];
@@ -46,6 +53,7 @@
 	self.beaconRegion1.notifyOnEntry = TRUE;
 	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
+  self.passageDictionnary = [[NSMutableDictionary alloc] init];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion1];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	
@@ -75,6 +83,7 @@
 	return YES;
 }
 
+
 - (void)applicationWillResignActive:(UIApplication *)application {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 	// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -100,6 +109,15 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
+  switch (state) {
+    case CLRegionStateInside:
+      [self getUserInformation];
+      [self sendDidEnterRequest:region];
+      break;
+      
+    default:
+      break;
+  }
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
@@ -119,26 +137,56 @@
 	self.proximity = beacon.proximity;
 }
 
-- (void)getUserInformation {
-  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+  [self.locationManager stopRangingBeaconsInRegion:region];
+  
+  CLBeaconRegion *bregion = (CLBeaconRegion*) region;
+  NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
+  NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
+  [self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
+  [self didExitRegionWithPassage:passageID];
+  [self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+}
+
+- (void)sendDidEnterRequest:(CLRegion*) region {
+  
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
   NSString *email = @"saez@sg.com";
-  NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
-  NSLog(@"final url ---> %@", finalUrl);
+  NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%@-%@", ((CLBeaconRegion*)region).proximityUUID.UUIDString, ((CLBeaconRegion*)region).major, ((CLBeaconRegion*)region).minor];
   AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
-  [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@"JSON: ----------------------- %@", responseObject);
+  [requestManager GET:baseURL parameters:@{@"method":@"checkOnDidEnter", @"email":email, @"beaconID":beaconIDAndMajorMinor} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *passageID = [responseObject objectForKey:@"passageID"];
+    [self.passageDictionnary setValue:passageID forKey:beaconIDAndMajorMinor];
+
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
   }];
-  //http://localhost:8888/ibeacon/user.php?method=login&email=saez@sg.com
-  
-  //http://10.18.197.199:8888/ibeacon/user.php?method=login&email=saez@sg.com
 }
 
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-	[self.locationManager stopRangingBeaconsInRegion:(CLBeaconRegion*)region];
+- (void)getUserInformation
+{
+  userManager = [UserManager sharedInstance];
 
-	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
+  NSString *email = @"saez@sg.com";
+  NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[UserManager sharedInstance] createUser:responseObject];
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
+}
+
+- (void)didExitRegionWithPassage:(NSString*)passageID
+{
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  [requestManager GET:baseURL parameters:@{@"method":@"onDidExit", @"passageID":passageID} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
 }
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
