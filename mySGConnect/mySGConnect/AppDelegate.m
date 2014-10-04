@@ -15,7 +15,7 @@
 
 @interface AppDelegate ()
 {
-  UserManager *userManager;
+	UserManager *userManager;
 }
 
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -39,12 +39,12 @@
   
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
-  
-  if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-    [self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
-  }
-  
-  self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
+	
+	if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+		[self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
+	}
+	
+	self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
 	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
 																 major:0
 																 minor:0
@@ -57,7 +57,7 @@
 	self.beaconRegion1.notifyOnEntry = TRUE;
 	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
-  self.passageDictionnary = [[NSMutableDictionary alloc] init];
+	self.passageDictionnary = [[NSMutableDictionary alloc] init];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion1];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	
@@ -69,7 +69,7 @@
 	[self.window.rootViewController presentViewController:self.navigationController animated:NO completion:^{
 		
 	}];
-
+	
 	return YES;
 }
 
@@ -99,37 +99,39 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-  
-  switch (state) {
-    case CLRegionStateInside:
-      [self getUserInformation];
-      [self sendDidEnterRequest:region];
-      break;
-      
-    default:
-      break;
-  }
+	
+	switch (state) {
+		case CLRegionStateInside:
+			[self getUserInformation];
+			[self sendDidEnterRequest:region];
+			break;
+			
+		default:
+			break;
+	}
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
-
+	
 	[self.locationManager startRangingBeaconsInRegion:region];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
-	[self.navigationController pushViewController:rvc animated:YES];
+	[self.navigationController presentViewController:rvc animated:YES completion:nil];
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
 	
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-  [self.locationManager stopRangingBeaconsInRegion:region];
-  
-  CLBeaconRegion *bregion = (CLBeaconRegion*) region;
-  NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
-  NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
-  [self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
-  [self didExitRegionWithPassage:passageID];
-  [self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+	[self.locationManager stopRangingBeaconsInRegion:region];
+	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
+	
+	CLBeaconRegion *bregion = (CLBeaconRegion*) region;
+	NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
+	NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
+	[self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
+	[self didExitRegionWithPassage:passageID];
+	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+	
 }
 
 -(void) locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
@@ -148,36 +150,46 @@
     NSString *passageID = [responseObject objectForKey:@"passageID"];
     [self.passageDictionnary setValue:passageID forKey:beaconIDAndMajorMinor];
 
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-  }];
+- (void)sendDidEnterRequest:(CLRegion*) region {
+	
+	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+	NSString *email = @"saez@sg.com";
+	NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%@-%@", ((CLBeaconRegion*)region).proximityUUID.UUIDString, ((CLBeaconRegion*)region).major, ((CLBeaconRegion*)region).minor];
+	AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+	[requestManager GET:baseURL parameters:@{@"method":@"checkOnDidEnter", @"email":email, @"beaconID":beaconIDAndMajorMinor} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		NSString *passageID = [responseObject objectForKey:@"passageID"];
+		[self.passageDictionnary setValue:passageID forKey:beaconIDAndMajorMinor];
+		
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"Error: %@", error);
+	}];
 }
 
 - (void)getUserInformation
 {
-  userManager = [UserManager sharedInstance];
-  
-  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
-  NSString *email = @"saez@sg.com";
-  NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
-  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
-  [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    [[UserManager sharedInstance] createUser:responseObject];
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-  }];
+	userManager = [UserManager sharedInstance];
+	
+	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
+	NSString *email = @"saez@sg.com";
+	NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
+	AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		[[UserManager sharedInstance] createUser:responseObject];
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"Error: %@", error);
+	}];
 }
 
 
 
 - (void)didExitRegionWithPassage:(NSString*)passageID
 {
-  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
-  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
-  [requestManager GET:baseURL parameters:@{@"method":@"onDidExit", @"passageID":passageID} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-  }];
+	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+	AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+	[requestManager GET:baseURL parameters:@{@"method":@"onDidExit", @"passageID":passageID} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"Error: %@", error);
+	}];
 }
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification

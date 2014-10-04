@@ -19,6 +19,9 @@
 		DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22E19E01E9C006E701F /* RetraitViewController.m */; };
 		DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23019E0210B006E701F /* CoreLocation.framework */; };
 		DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23219E02111006E701F /* CoreBluetooth.framework */; };
+		DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */; };
+		DAB1EDE319E0842700B91F93 /* wifi2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE019E0842700B91F93 /* wifi2@2x.png */; };
+		DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE119E0842700B91F93 /* wifi3@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		DA27E22E19E01E9C006E701F /* RetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitViewController.m; sourceTree = "<group>"; };
 		DA27E23019E0210B006E701F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DA27E23219E02111006E701F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi1@2x.png"; sourceTree = "<group>"; };
+		DAB1EDE019E0842700B91F93 /* wifi2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi2@2x.png"; sourceTree = "<group>"; };
+		DAB1EDE119E0842700B91F93 /* wifi3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi3@2x.png"; sourceTree = "<group>"; };
 		E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +115,7 @@
 		DA27E20619E01E16006E701F /* mySGConnect */ = {
 			isa = PBXGroup;
 			children = (
+				DAB1EDDE19E0841700B91F93 /* Images */,
 				8FE1C89B19E0447200B77BB9 /* UserManager.h */,
 				8FE1C89C19E0447200B77BB9 /* UserManager.m */,
 				DA27E20B19E01E16006E701F /* AppDelegate.h */,
@@ -149,6 +156,16 @@
 				DA27E22219E01E16006E701F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DAB1EDDE19E0841700B91F93 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */,
+				DAB1EDE019E0842700B91F93 /* wifi2@2x.png */,
+				DAB1EDE119E0842700B91F93 /* wifi3@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		DBA08AE9939945AD7F76E790 /* Frameworks */ = {
@@ -244,6 +261,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA27E21319E01E16006E701F /* Main.storyboard in Resources */,
+				DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */,
+				DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */,
+				DAB1EDE319E0842700B91F93 /* wifi2@2x.png in Resources */,
 				DA27E21819E01E16006E701F /* LaunchScreen.xib in Resources */,
 				DA27E21519E01E16006E701F /* Images.xcassets in Resources */,
 			);
