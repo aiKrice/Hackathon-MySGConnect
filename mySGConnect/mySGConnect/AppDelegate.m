@@ -84,22 +84,38 @@
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+
 	[self.locationManager startRangingBeaconsInRegion:region];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	[self.navigationController pushViewController:rvc animated:YES];
+	
+	
+	
+	
+	
+	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
+	
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
 	[self.locationManager stopRangingBeaconsInRegion:region];
+
+	
+	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+}
+
+- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
+	
 	
 }
 
-- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
-{
-	
-	
+-(void) sendLocalNotification: (NSString*) message{
+	UILocalNotification *notif = [[UILocalNotification alloc] init];
+	notif.alertBody = message;
+	notif.soundName = UILocalNotificationDefaultSoundName;
+	notif.applicationIconBadgeNumber += 1;
+	[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
 }
-
 
 @end
