@@ -14,9 +14,6 @@
 #import "UserManager.h"
 
 @interface AppDelegate ()
-{
-	UserManager *userManager;
-}
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -24,6 +21,7 @@
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
 @property (strong, nonatomic) NSUUID *uuid;
 @property (strong, nonatomic) NSMutableDictionary *passageDictionnary;
+
 
 @end
 
@@ -45,12 +43,13 @@
 	}
 	
 	self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
+	NSUUID* uuid2 = [[NSUUID alloc] initWithUUIDString:@"11111111-1111-1111-1111-111111111111"];
 	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
 																 major:0
-																 minor:0
+																 minor:1
 															identifier:@"com.mysgconnnect"];
-	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
-																 major:0
+	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid2
+																 major:1
 																 minor:1
 															identifier:@"com.mysgconnnect"];
 	self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
@@ -99,11 +98,17 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-	
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	switch (state) {
 		case CLRegionStateInside:
 			[self getUserInformation];
 			[self sendDidEnterRequest:region];
+			[self.locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+			
+			[self.navigationController presentViewController:rvc animated:YES completion:nil];
+			[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
+			
 			break;
 			
 		default:
@@ -113,16 +118,10 @@
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
 	
-	[self.locationManager startRangingBeaconsInRegion:region];
-	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
-	[self.navigationController presentViewController:rvc animated:YES completion:nil];
-	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
-	
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-	[self.locationManager stopRangingBeaconsInRegion:region];
+	[self.locationManager stopRangingBeaconsInRegion:(CLBeaconRegion*)region];
 	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
 	
 	CLBeaconRegion *bregion = (CLBeaconRegion*) region;
@@ -155,9 +154,7 @@
 	}];
 }
 
-- (void)getUserInformation
-{
-	userManager = [UserManager sharedInstance];
+- (void)getUserInformation{
 	
 	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
 	NSString *email = @"saez@sg.com";
