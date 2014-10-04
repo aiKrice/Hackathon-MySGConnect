@@ -114,18 +114,10 @@ Actuellemement vous êtes à :</string>
                                         <rect key="frame" x="104" y="316" width="112" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="zzY-dc-AWX">
-                                        <rect key="frame" x="0.0" y="160" width="320" height="232"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" id="zn8-cV-8Th">
-                                                <rect key="frame" x="235" y="8" width="85" height="87"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clavier.png" id="yoc-Po-bdf">
+                                        <rect key="frame" x="0.0" y="177" width="320" height="232"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -134,6 +126,7 @@ Actuellemement vous êtes à :</string>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
+                        <outlet property="clavier" destination="yoc-Po-bdf" id="qAT-7Y-EgZ"/>
                         <outlet property="distance" destination="IUZ-F3-W4n" id="6mP-Xu-44D"/>
                         <outlet property="moneyInputTF" destination="PvT-LZ-MAA" id="ZeN-HI-0tC"/>
                         <outlet property="signalNormal" destination="SPT-mm-QVX" id="L6g-sC-nZM"/>
@@ -147,6 +140,7 @@ Actuellemement vous êtes à :</string>
         </scene>
     </scenes>
     <resources>
+        <image name="clavier.png" width="640" height="411"/>
         <image name="wifi1.png" width="52" height="38"/>
         <image name="wifi2.png" width="82" height="58"/>
         <image name="wifi3.png" width="114" height="76"/>

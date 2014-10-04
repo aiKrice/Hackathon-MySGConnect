@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signalWeak;
 @property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
+@property (weak, nonatomic) IBOutlet UIImageView *clavier;
 
 -(void) refreshLabel:(NSTimer *)timer;
 
