@@ -11,7 +11,9 @@
 @interface UserManager : NSObject
 
 + (UserManager*)sharedInstance;
+- (void)createUser:(NSDictionary *)userInfoDictionnary;
 
-static UserManager *_sharedInstance;
+
+
 
 @end

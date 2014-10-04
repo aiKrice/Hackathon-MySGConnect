@@ -8,6 +8,20 @@
 
 #import "UserManager.h"
 
+@interface UserManager ()
+{
+  
+}
+@property (nonatomic, strong) NSString *userLastName;
+@property (nonatomic, strong) NSString *userFirstName;
+@property (nonatomic, strong) NSString *userEmail;
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSNumber *userBalance;
+@property (nonatomic, strong) NSString *cashoutDate;
+@property (nonatomic, strong) NSNumber *pinCode;
+
+@end
+
 @implementation UserManager
 
 + (UserManager*)sharedInstance
@@ -23,6 +37,17 @@
     _sharedInstance = [[UserManager alloc] init];
   });
   return _sharedInstance;
+}
+
+- (void)createUser:(NSDictionary *)userInfoDictionnary
+{
+  self.userLastName = [userInfoDictionnary objectForKey:@"lastname"];
+  self.userFirstName = [userInfoDictionnary objectForKey:@"firstname"];
+  self.userEmail = [userInfoDictionnary objectForKey:@"email"];
+  self.userId = [userInfoDictionnary objectForKey:@"idUSER"];
+  self.userBalance = [NSNumber numberWithInt:[[userInfoDictionnary objectForKey:@"balance"] intValue]];
+  self.cashoutDate = [userInfoDictionnary objectForKey:@"datederetrait"];
+  self.pinCode = [NSNumber numberWithInt:[[userInfoDictionnary objectForKey:@"PINCODE"] intValue]];
 }
 
 @end

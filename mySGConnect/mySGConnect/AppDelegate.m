@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  mySGConnect
@@ -10,13 +11,27 @@
 #import "RetraitViewController.h"
 #import "AccueilViewController.h"
 #import <AFNetworking.h>
+#import "UserManager.h"
+
+#define kMajorValueBeacon1 0
+#define kMinorValueBeacon1 0
+#define kMajorValueBeacon2 0
+#define kMinorValueBeacon2 1
+#define kBeaconUUID
 
 @interface AppDelegate ()
+{
+  UserManager *userManager;
+}
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion1;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
+@property (strong, nonatomic) NSUUID *uuid;
+@property (strong, nonatomic) NSMutableDictionary *passageDictionnary;
+
+
 
 @end
 
@@ -33,14 +48,14 @@
     [self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
   }
   
-	NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
-	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-																 major:0
-																 minor:0
+  self.uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
+	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
+																 major:kMajorValueBeacon1
+																 minor:kMinorValueBeacon1
 															identifier:@"com.mysgconnnect"];
-	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-																 major:0
-																 minor:1
+	self.beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid
+																 major:kMajorValueBeacon2
+																 minor:kMinorValueBeacon2
 															identifier:@"com.mysgconnnect"];
 	self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion1.notifyOnEntry = TRUE;
@@ -86,8 +101,18 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-  NSLog(@"toto");
-  [self getUserInformation];
+  
+  switch (state) {
+    case CLRegionStateInside:
+      [self getUserInformation];
+      [self sendDidEnterRequest:region];
+      break;
+      
+    default:
+      break;
+  }
+  
+  
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
@@ -97,19 +122,33 @@
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	[self.navigationController pushViewController:rvc animated:YES];
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
-  [self getUserInformation];
 	
+}
+
+- (void)sendDidEnterRequest:(CLRegion*) region {
+  NSLog(@"------ send");
+  
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  NSString *email = @"saez@sg.com";
+  NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%d-%d", ((CLBeaconRegion*)region).proximityUUID.UUIDString, kMajorValueBeacon1, kMinorValueBeacon1];
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  [requestManager GET:baseURL parameters:@{@"method":@"checkOnDidEnter", @"email":email, @"beaconID":beaconIDAndMajorMinor} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
 }
 
 - (void)getUserInformation
 {
+  userManager = [UserManager sharedInstance];
+  
   NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
   NSString *email = @"saez@sg.com";
   NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
-  NSLog(@"final url ---> %@", finalUrl);
   AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
   [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSLog(@"JSON: ----------------------- %@", responseObject);
+    [[UserManager sharedInstance] createUser:responseObject];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
   }];
