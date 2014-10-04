@@ -7,12 +7,20 @@
 //
 
 #import "RetraitViewController.h"
+#import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 @interface RetraitViewController ()
-@property (nonatomic, strong) NSNumber *moneyEntered;
 
+@property (weak, nonatomic) IBOutlet UITextField *moneyInputTF;
+@property (weak, nonatomic) IBOutlet UILabel *distance;
+@property (weak, nonatomic) IBOutlet UIImageView *signalWeak;
+@property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
+@property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 
-- (IBAction)didEnterMoney:(id)sender;
+-(void) refreshLabel:(NSTimer *)timer;
+
 @end
 
 @implementation RetraitViewController
@@ -20,13 +28,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.moneyInputTF.delegate = self;
+	
+	
+	[NSTimer scheduledTimerWithTimeInterval:1
+									 target:self
+								   selector:@selector(refreshLabel:)
+								   userInfo:nil
+									repeats:YES];
 }
 
+-(void) refreshLabel: (NSTimer *)timer{
+	AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+	CLProximity proximity = appdelegate.proximity;
+	if (proximity == CLProximityImmediate){
+		[self displaySecureKeyboard];
+		self.signalStrong.hidden = NO;
+	} else {
+		self.signalStrong.hidden = YES;
+		[self removeSecureKeyboard];
+		if (proximity == CLProximityNear){
+			self.signalStrong.hidden = YES;
+		} else {
+			self.signalNormal.hidden = NO;
+		}
+		
+	}
+	
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+-(void) displaySecureKeyboard{
+	
+}
+
+-(void) removeSecureKeyboard{
+	
+}
 /*
 #pragma mark - Navigation
 
@@ -36,8 +77,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction) didEnterMoney:(id)sender {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
+	return true;
 }
 @end

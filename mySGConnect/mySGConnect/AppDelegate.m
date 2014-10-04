@@ -57,6 +57,20 @@
 	[self.window.rootViewController presentViewController:self.navigationController animated:NO completion:^{
 		
 	}];
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
+	[self.navigationController pushViewController:rvc animated:YES];
+	
+	
 
 	return YES;
 }
@@ -86,23 +100,26 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-  NSLog(@"toto");
-  [self getUserInformation];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
 
-	[self.locationManager startRangingBeaconsInRegion:region];
+	[self.locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	[self.navigationController pushViewController:rvc animated:YES];
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
-  [self getUserInformation];
+	[self getUserInformation];
 	
 }
 
-- (void)getUserInformation
-{
+-(void) locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
+	CLBeacon *beacon = [beacons firstObject];
+
+	self.proximity = beacon.proximity;
+}
+
+- (void)getUserInformation {
   NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
   NSString *email = @"saez@sg.com";
   NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
@@ -119,13 +136,13 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-	[self.locationManager stopRangingBeaconsInRegion:region];
+	[self.locationManager stopRangingBeaconsInRegion:(CLBeaconRegion*)region];
 
 	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
 }
 
-- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
-{
+- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
+	notification.applicationIconBadgeNumber = 0;
   
 }
 
@@ -136,5 +153,7 @@
 	notif.applicationIconBadgeNumber += 1;
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
 }
+
+
 
 @end
