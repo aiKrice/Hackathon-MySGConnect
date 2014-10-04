@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RetraitViewController.h"
 #import "AccueilViewController.h"
+#import <AFNetworking.h>
 
 @interface AppDelegate ()
 
@@ -27,6 +28,11 @@
 	
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
+  
+  if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+    [self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
+  }
+  
 	NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
 	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
 																 major:0
@@ -80,7 +86,8 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-	
+  NSLog(@"toto");
+  [self getUserInformation];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
@@ -89,9 +96,26 @@
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	[self.navigationController pushViewController:rvc animated:YES];
-	
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
+  [self getUserInformation];
 	
+}
+
+- (void)getUserInformation
+{
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?method=login";
+  NSString *email = @"saez@sg.com";
+  NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
+  NSLog(@"final url ---> %@", finalUrl);
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"JSON: ----------------------- %@", responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
+  //http://localhost:8888/ibeacon/user.php?method=login&email=saez@sg.com
+  
+  //http://10.18.197.199:8888/ibeacon/user.php?method=login&email=saez@sg.com
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
@@ -100,9 +124,9 @@
 	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
 }
 
-- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
-	
-	
+- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
+{
+  
 }
 
 -(void) sendLocalNotification: (NSString*) message{
