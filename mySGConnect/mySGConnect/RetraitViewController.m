@@ -48,9 +48,9 @@
 		self.signalStrong.hidden = YES;
 		[self removeSecureKeyboard];
 		if (proximity == CLProximityNear){
-			self.signalStrong.hidden = YES;
-		} else {
 			self.signalNormal.hidden = NO;
+		} else {
+			self.signalNormal.hidden = YES;
 		}
 		
 	}
@@ -79,6 +79,7 @@
 */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
+	[textField resignFirstResponder];
 	return true;
 }
 @end
