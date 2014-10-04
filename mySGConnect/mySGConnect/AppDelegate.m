@@ -31,10 +31,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	
-	if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-		[application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-	}
-	
+  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+  }
+  
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
 	
@@ -134,9 +134,9 @@
 }
 
 -(void) locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
-	CLBeacon *beacon = [beacons firstObject];
-	
-	self.proximity = beacon.proximity;
+  CLBeacon *beacon = [beacons firstObject];
+  
+  self.proximity = beacon.proximity;
 }
 
 - (void)sendDidEnterRequest:(CLRegion*) region {
@@ -181,7 +181,7 @@
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
 {
-	notification.applicationIconBadgeNumber = 0;
+  notification.applicationIconBadgeNumber = 0;
 }
 
 -(void) sendLocalNotification: (NSString*) message{
