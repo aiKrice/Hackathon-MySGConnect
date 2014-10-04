@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8FE1C89D19E04BE400B77BB9 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1C89C19E0447200B77BB9 /* UserManager.m */; };
+		8FEF053819E0B6E0007CEC03 /* AccueilScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */; };
 		CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D265F9DB97BDA2EFDE967677 /* libPods.a */; };
 		DA27E20A19E01E16006E701F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20919E01E16006E701F /* main.m */; };
 		DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20C19E01E16006E701F /* AppDelegate.m */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		8FE1C89B19E0447200B77BB9 /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = ../UserManager.h; sourceTree = "<group>"; };
 		8FE1C89C19E0447200B77BB9 /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = ../UserManager.m; sourceTree = "<group>"; };
+		8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccueilScreen.jpg; sourceTree = "<group>"; };
 		B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D265F9DB97BDA2EFDE967677 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20419E01E16006E701F /* mySGConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mySGConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 		DAB1EDDE19E0841700B91F93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */,
 				DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */,
 				DAB1EDE019E0842700B91F93 /* wifi2@2x.png */,
 				DAB1EDE119E0842700B91F93 /* wifi3@2x.png */,
@@ -260,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FEF053819E0B6E0007CEC03 /* AccueilScreen.jpg in Resources */,
 				DA27E21319E01E16006E701F /* Main.storyboard in Resources */,
 				DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */,
 				DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */,

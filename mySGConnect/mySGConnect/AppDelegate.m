@@ -141,16 +141,6 @@
 }
 
 - (void)sendDidEnterRequest:(CLRegion*) region {
-  
-  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
-  NSString *email = @"saez@sg.com";
-  NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%@-%@", ((CLBeaconRegion*)region).proximityUUID.UUIDString, ((CLBeaconRegion*)region).major, ((CLBeaconRegion*)region).minor];
-  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
-  [requestManager GET:baseURL parameters:@{@"method":@"checkOnDidEnter", @"email":email, @"beaconID":beaconIDAndMajorMinor} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSString *passageID = [responseObject objectForKey:@"passageID"];
-    [self.passageDictionnary setValue:passageID forKey:beaconIDAndMajorMinor];
-
-- (void)sendDidEnterRequest:(CLRegion*) region {
 	
 	NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
 	NSString *email = @"saez@sg.com";
