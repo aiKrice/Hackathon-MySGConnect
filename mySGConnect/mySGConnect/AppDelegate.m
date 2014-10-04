@@ -96,7 +96,6 @@
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	[self.navigationController pushViewController:rvc animated:YES];
-
 	[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
   [self getUserInformation];
 	
@@ -122,7 +121,6 @@
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
 	[self.locationManager stopRangingBeaconsInRegion:region];
 
-	
 	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
 }
 
