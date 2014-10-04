@@ -18,6 +18,12 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>TOTO</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 </dict>

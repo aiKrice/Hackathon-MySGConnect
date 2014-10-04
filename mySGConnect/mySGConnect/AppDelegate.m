@@ -27,6 +27,11 @@
 	
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
+  
+  if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+    [self.locationManager performSelector:@selector(requestAlwaysAuthorization) withObject:nil ];
+  }
+  
 	NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000000-0000-0000-0000-000000000000"];
 	self.beaconRegion1 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
 																 major:0
@@ -80,10 +85,13 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
-	
+  NSLog(@"toto");
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+  
+  
+  
 	[self.locationManager startRangingBeaconsInRegion:region];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
@@ -97,8 +105,7 @@
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
 {
-	
-	
+  
 }
 
 
