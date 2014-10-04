@@ -61,6 +61,7 @@
 	self.beaconRegion1.notifyOnEntry = TRUE;
 	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
+  self.passageDictionnary = [[NSMutableDictionary alloc] init];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion1];
 	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	
@@ -75,6 +76,7 @@
 
 	return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -126,13 +128,15 @@
 }
 
 - (void)sendDidEnterRequest:(CLRegion*) region {
-  NSLog(@"------ send");
   
   NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
   NSString *email = @"saez@sg.com";
-  NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%d-%d", ((CLBeaconRegion*)region).proximityUUID.UUIDString, kMajorValueBeacon1, kMinorValueBeacon1];
+  NSString *beaconIDAndMajorMinor = [NSString stringWithFormat:@"%@-%@-%@", ((CLBeaconRegion*)region).proximityUUID.UUIDString, ((CLBeaconRegion*)region).major, ((CLBeaconRegion*)region).minor];
   AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
   [requestManager GET:baseURL parameters:@{@"method":@"checkOnDidEnter", @"email":email, @"beaconID":beaconIDAndMajorMinor} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *passageID = [responseObject objectForKey:@"passageID"];
+    [self.passageDictionnary setValue:passageID forKey:beaconIDAndMajorMinor];
+
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
   }];
@@ -147,7 +151,6 @@
   NSString *finalUrl = [NSString stringWithFormat:@"%@&email=%@", baseURL, email];
   AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
   [requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@"JSON: ----------------------- %@", responseObject);
     [[UserManager sharedInstance] createUser:responseObject];
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
@@ -160,7 +163,22 @@
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
 	[self.locationManager stopRangingBeaconsInRegion:region];
 
+  CLBeaconRegion *bregion = (CLBeaconRegion*) region;
+  NSString *removeKeyOnDictionnary = [NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor];
+  NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
+  [self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
+  [self didExitRegionWithPassage:passageID];
 	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+}
+
+- (void)didExitRegionWithPassage:(NSString*)passageID
+{
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  [requestManager GET:baseURL parameters:@{@"method":@"onDidExit", @"passageID":passageID} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
 }
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
