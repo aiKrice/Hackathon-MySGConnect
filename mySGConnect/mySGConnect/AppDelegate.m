@@ -125,7 +125,8 @@
 	NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
 	[self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
 	[self didExitRegionWithPassage:passageID];
-	[self sendLocalNotification:@"Merci d'etre venu et à bientot" withData:@"exit"];
+
+	[self sendLocalNotification: [NSString stringWithFormat:@"Merci d'être venu et à bientot Mr %@.",[UserManager sharedInstance].userLastName] withData:@"exit" withRegion:(CLBeaconRegion*)region];
 	
 }
 
@@ -159,7 +160,7 @@
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
 		[self.locationManager startMonitoringForRegion:self.beaconRegion1];
-	//	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
+		[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];
@@ -179,18 +180,26 @@
   application.applicationIconBadgeNumber = 0;
 	if (notification.userInfo != nil && [[notification.userInfo objectForKey:@"action"] isEqualToString:@"exit"]){
 		[self.navigationController dismissViewControllerAnimated:YES completion:^{
+			NSString *url = nil;
+			if ([[notification.userInfo objectForKey:@"region"] isEqualToString:@"11111111-1111-1111-1111-111111111111-1-1"]){
+				url = @"http://www.auchan.fr";
+			} else {
+				url = @"http://www.galerieslafayette.com/";
+			}
 			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 			OfferViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OfferViewController"];
+			vc.url = url;
 			[self.window.rootViewController presentViewController:vc animated:YES completion:nil];
 		}];
+		
 	}
 }
 
--(void) sendLocalNotification: (NSString*) message withData: (NSString*) data{
+-(void) sendLocalNotification: (NSString*) message withData: (NSString*) data withRegion: (CLBeaconRegion*) region{
 	UILocalNotification *notif = [[UILocalNotification alloc] init];
 	notif.alertBody = message;
 	if (data != nil){
-		notif.userInfo = @{@"action": @"exit"};
+		notif.userInfo = @{@"action": @"exit", @"region": [NSString stringWithFormat:@"%@-%@-%@", ((CLBeaconRegion*)region).proximityUUID.UUIDString, ((CLBeaconRegion*)region).major, ((CLBeaconRegion*)region).minor]};
 	}
 	notif.soundName = UILocalNotificationDefaultSoundName;
 	notif.applicationIconBadgeNumber += 1;

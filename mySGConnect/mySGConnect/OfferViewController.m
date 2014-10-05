@@ -7,8 +7,12 @@
 //
 
 #import "OfferViewController.h"
+#import "UserManager.h"
 
 @interface OfferViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *aurevoirMessage;
+@property (weak, nonatomic) IBOutlet UIWebView *offerWebView;
+
 
 @end
 
@@ -17,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.aurevoirMessage.text = [NSString stringWithFormat:@"Nous vous souhaitons une agréable journée Mr %@. Pour vous remercier de votre fidélité, nous vous proposons une offre de notre partenaire :", [UserManager sharedInstance].userLastName];
+	
+	NSURL *websiteUrl = [NSURL URLWithString:self.url];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:websiteUrl];
+	[self.offerWebView loadRequest:urlRequest];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface OfferViewController : UIViewController
+@property (strong, nonatomic) NSString* url;
 
 @end
