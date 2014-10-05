@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "ValidationRetraitViewController.h"
+#import <AFNetworking.h>
+#import "UserManager.h"
 
 
 @interface RetraitViewController ()
@@ -20,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 @property (weak, nonatomic) IBOutlet UIImageView *clavier;
 @property (assign, nonatomic) int pinSize;
+@property (weak, nonatomic) IBOutlet UILabel *actualBalance;
 
 -(void) refreshLabel:(NSTimer *)timer;
 - (void) onDidTap:(UITapGestureRecognizer*) sender;
@@ -31,7 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	self.moneyInputTF.delegate = self;
-	
+  [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userBalance]];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
@@ -76,6 +80,13 @@
 	}
 	
 }
+
+- (void)checkTextField:(id)sender
+{
+  int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%d", displayBalance]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -83,6 +94,26 @@
 
 -(void) displaySecureKeyboard{
 	self.clavier.hidden = NO;
+}
+
+- (void)RetraitRequete
+{
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  
+  int newBalance = [self calculateNewBalanceWith:[UserManager sharedInstance].userBalance andActualMoney:self.moneyInputTF.text];
+  NSNumber *balanceTosend = [[NSNumber alloc] initWithInt:newBalance];
+  [requestManager GET:baseURL parameters:@{@"method":@"retrait", @"email":@"saez@sg.com", @"balance":balanceTosend} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
+}
+
+- (int)calculateNewBalanceWith:(NSNumber *)userBalance andActualMoney:(NSString *)money
+{
+  int newMoney = (uint32_t)[money integerValue];
+  int newBalance = (uint32_t)[userBalance integerValue] - newMoney;
+  return newBalance;
 }
 
 -(void) removeSecureKeyboard{
@@ -103,4 +134,5 @@
 	[textField resignFirstResponder];
 	return true;
 }
+
 @end

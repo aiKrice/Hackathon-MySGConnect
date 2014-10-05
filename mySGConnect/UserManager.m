@@ -12,13 +12,7 @@
 {
   
 }
-@property (nonatomic, strong) NSString *userLastName;
-@property (nonatomic, strong) NSString *userFirstName;
-@property (nonatomic, strong) NSString *userEmail;
-@property (nonatomic, strong) NSString *userId;
-@property (nonatomic, strong) NSNumber *userBalance;
-@property (nonatomic, strong) NSString *cashoutDate;
-@property (nonatomic, strong) NSNumber *pinCode;
+
 
 @end
 
