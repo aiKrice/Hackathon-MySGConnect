@@ -12,6 +12,7 @@
 #import "AccueilViewController.h"
 #import <AFNetworking.h>
 #import "UserManager.h"
+#import "OfferViewController.h"
 
 @interface AppDelegate ()
 
@@ -105,7 +106,7 @@
 			[self.locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
 			
 			[self.navigationController presentViewController:rvc animated:YES completion:nil];
-			[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale"];
+			[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale" withData:nil];
 			
 			break;
 			
@@ -127,7 +128,7 @@
 	NSString *passageID = [self.passageDictionnary objectForKey:[NSString stringWithFormat:@"%@-%@-%@", bregion.proximityUUID.UUIDString, bregion.major, bregion.minor]];
 	[self.passageDictionnary removeObjectForKey:removeKeyOnDictionnary];
 	[self didExitRegionWithPassage:passageID];
-	[self sendLocalNotification:@"Merci d'etre venu et à bientot"];
+	[self sendLocalNotification:@"Merci d'etre venu et à bientot" withData:@"exit"];
 	
 }
 
@@ -161,13 +162,11 @@
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
     [self.locationManager startMonitoringForRegion:self.beaconRegion1];
-    //[self.locationManager startMonitoringForRegion:self.beaconRegion2];
+    [self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];
 }
-
-
 
 - (void)didExitRegionWithPassage:(NSString*)passageID
 {
@@ -181,11 +180,21 @@
 
 - (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
   application.applicationIconBadgeNumber = 0;
+	if (notification.userInfo != nil && [[notification.userInfo objectForKey:@"action"] isEqualToString:@"exit"]){
+		[self.navigationController dismissViewControllerAnimated:YES completion:^{
+			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+			OfferViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OfferViewController"];
+			[self.navigationController presentViewController:vc animated:YES completion:nil];
+		}];
+	}
 }
 
--(void) sendLocalNotification: (NSString*) message{
+-(void) sendLocalNotification: (NSString*) message withData: (NSString*) data{
 	UILocalNotification *notif = [[UILocalNotification alloc] init];
 	notif.alertBody = message;
+	if (data != nil){
+		notif.userInfo = @{@"action": @"exit"};
+	}
 	notif.soundName = UILocalNotificationDefaultSoundName;
 	notif.applicationIconBadgeNumber += 1;
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notif];
