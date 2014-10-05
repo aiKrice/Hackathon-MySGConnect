@@ -29,7 +29,7 @@
 @property (assign, nonatomic) int pinSize;
 @property (weak, nonatomic) IBOutlet UILabel *actualBalance;
 
--(void) refreshLabel:(NSTimer *)timer;
+-(void) refreshImageBeacon:(NSTimer *)timer;
 - (void) onDidTap:(UITapGestureRecognizer*) sender;
 @end
 
@@ -47,7 +47,7 @@
 	
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
-								   selector:@selector(refreshLabel:)
+								   selector:@selector(refreshImageBeacon:)
 								   userInfo:nil
 									repeats:YES];
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDidTap:)];
@@ -63,6 +63,7 @@
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 		ValidationRetraitViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ValidationRetraitViewController"];
 		[self dismissViewControllerAnimated:YES completion:^{
+			[self RetraitRequete];
 			AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 			[appdelegate.navigationController presentViewController:vc animated:YES completion:nil];
 			
@@ -70,7 +71,7 @@
 	}
 }
 
--(void) refreshLabel: (NSTimer *)timer{
+-(void) refreshImageBeacon: (NSTimer *)timer{
 	AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 	CLProximity proximity = appdelegate.proximity;
 	if (proximity == CLProximityImmediate){
@@ -79,10 +80,12 @@
 		self.signalStrong.hidden = NO;
 	} else {
 		self.signalStrong.hidden = YES;
-		[self removeSecureKeyboard];
+		
 		if (proximity == CLProximityNear){
+			[self displaySecureKeyboard];
 			self.signalNormal.hidden = NO;
 		} else {
+			[self removeSecureKeyboard];
 			self.signalNormal.hidden = YES;
 		}
 		
