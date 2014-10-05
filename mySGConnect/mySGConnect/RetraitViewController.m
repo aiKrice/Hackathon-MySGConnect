@@ -9,6 +9,8 @@
 #import "RetraitViewController.h"
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AFNetworking.h>
+#import "UserManager.h"
 
 
 @interface RetraitViewController ()
@@ -63,6 +65,26 @@
 
 -(void) displaySecureKeyboard{
 	
+}
+
+- (void)RetraitRequete
+{
+  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+  
+  int newBalance = [self calculateNewBalanceWith:[UserManager sharedInstance].userBalance andActualMoney:self.moneyInputTF.text];
+  NSNumber *balanceTosend = [[NSNumber alloc] initWithInt:newBalance];
+  [requestManager GET:baseURL parameters:@{@"method":@"retrait", @"email":@"saez@sg.com", @"balance":balanceTosend} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
+}
+
+- (int)calculateNewBalanceWith:(NSNumber *)userBalance andActualMoney:(NSString *)money
+{
+  int newMoney = (uint32_t)[money integerValue];
+  int newBalance = (uint32_t)[userBalance integerValue] - newMoney;
+  return newBalance;
 }
 
 -(void) removeSecureKeyboard{
