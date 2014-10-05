@@ -34,6 +34,7 @@
   if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
   }
+  [self getUserInformation];
   
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
@@ -57,10 +58,7 @@
 	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
 	self.passageDictionnary = [[NSMutableDictionary alloc] init];
-	[self.locationManager startMonitoringForRegion:self.beaconRegion1];
-	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
-	
-	
+
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 	AccueilViewController *vc = (AccueilViewController*) [storyboard instantiateViewControllerWithIdentifier:@"AccueilViewController"];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -102,7 +100,7 @@
 	RetraitViewController *rvc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitViewController"];
 	switch (state) {
 		case CLRegionStateInside:
-			[self getUserInformation];
+			
 			[self sendDidEnterRequest:region];
 			[self.locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
 			
@@ -162,6 +160,8 @@
 	AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
+    [self.locationManager startMonitoringForRegion:self.beaconRegion1];
+    [self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];

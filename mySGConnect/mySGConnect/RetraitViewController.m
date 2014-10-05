@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 @property (weak, nonatomic) IBOutlet UIImageView *clavier;
+@property (weak, nonatomic) IBOutlet UILabel *actualBalance;
+
 @property (strong, nonatomic) NSNumber *pin;
 
 -(void) refreshLabel:(NSTimer *)timer;
@@ -32,7 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	self.moneyInputTF.delegate = self;
-	
+  [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userBalance]];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
@@ -61,6 +64,13 @@
 	}
 	
 }
+
+- (void)checkTextField:(id)sender
+{
+  int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%d", displayBalance]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -108,4 +118,5 @@
 	[textField resignFirstResponder];
 	return true;
 }
+
 @end
