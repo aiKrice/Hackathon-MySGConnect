@@ -54,9 +54,7 @@
 																 major:1
 																 minor:1
 															identifier:@"com.mysgconnnect"];
-  //self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion1.notifyOnEntry = TRUE;
-  //self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
 	self.passageDictionnary = [[NSMutableDictionary alloc] init];
 
@@ -161,8 +159,8 @@
 	AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
-    [self.locationManager startMonitoringForRegion:self.beaconRegion1];
-    [self.locationManager startMonitoringForRegion:self.beaconRegion2];
+		[self.locationManager startMonitoringForRegion:self.beaconRegion1];
+		[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];
@@ -184,7 +182,7 @@
 		[self.navigationController dismissViewControllerAnimated:YES completion:^{
 			UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 			OfferViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OfferViewController"];
-			[self.navigationController presentViewController:vc animated:YES completion:nil];
+			[self.window.rootViewController presentViewController:vc animated:YES completion:nil];
 		}];
 	}
 }
