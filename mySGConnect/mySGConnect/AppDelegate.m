@@ -160,7 +160,7 @@
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
 		[self.locationManager startMonitoringForRegion:self.beaconRegion1];
-		[self.locationManager startMonitoringForRegion:self.beaconRegion2];
+	//	[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];

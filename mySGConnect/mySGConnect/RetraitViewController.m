@@ -80,10 +80,12 @@
 		self.signalStrong.hidden = NO;
 	} else {
 		self.signalStrong.hidden = YES;
-		[self removeSecureKeyboard];
+		
 		if (proximity == CLProximityNear){
+			[self displaySecureKeyboard];
 			self.signalNormal.hidden = NO;
 		} else {
+			[self removeSecureKeyboard];
 			self.signalNormal.hidden = YES;
 		}
 		
