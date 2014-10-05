@@ -14,11 +14,11 @@
 @interface RetraitViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *moneyInputTF;
-@property (weak, nonatomic) IBOutlet UILabel *distance;
 @property (weak, nonatomic) IBOutlet UIImageView *signalWeak;
 @property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 @property (weak, nonatomic) IBOutlet UIImageView *clavier;
+@property (strong, nonatomic) NSNumber *pin;
 
 -(void) refreshLabel:(NSTimer *)timer;
 
@@ -37,6 +37,8 @@
 								   selector:@selector(refreshLabel:)
 								   userInfo:nil
 									repeats:YES];
+	//UITapGestureRecognizer *tap = [UITapGestureRecognizer alloc] initWithTarget:<#(id)#> action:<#(SEL)#>;
+	//self.clavier
 }
 
 -(void) refreshLabel: (NSTimer *)timer{
@@ -63,10 +65,11 @@
 }
 
 -(void) displaySecureKeyboard{
-	
+	self.clavier.hidden = NO;
 }
 
 -(void) removeSecureKeyboard{
+	self.clavier.hidden = YES;
 	
 }
 /*
