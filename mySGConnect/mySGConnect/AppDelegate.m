@@ -104,7 +104,8 @@
 			[self.locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
 			
 			[self.navigationController presentViewController:rvc animated:YES completion:nil];
-			[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale" withData:nil];
+			[self sendLocalNotification:[NSString stringWithFormat:@"Bonjour et bienvenue à votre agence Société générale Mr %@",[UserManager sharedInstance].userLastName] withData:nil withRegion:(CLBeaconRegion*)region];
+			
 			break;
 			
 		default:
