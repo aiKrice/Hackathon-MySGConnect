@@ -24,6 +24,7 @@
 		DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */; };
 		DAB1EDE319E0842700B91F93 /* wifi2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE019E0842700B91F93 /* wifi2@2x.png */; };
 		DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE119E0842700B91F93 /* wifi3@2x.png */; };
+		DAB1EDE619E0BB0F00B91F93 /* clavier.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE519E0BB0F00B91F93 /* clavier.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi1@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE019E0842700B91F93 /* wifi2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi2@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE119E0842700B91F93 /* wifi3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi3@2x.png"; sourceTree = "<group>"; };
+		DAB1EDE519E0BB0F00B91F93 /* clavier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clavier.png; sourceTree = "<group>"; };
 		E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
