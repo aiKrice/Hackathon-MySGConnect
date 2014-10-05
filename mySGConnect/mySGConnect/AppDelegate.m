@@ -15,7 +15,7 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) UINavigationController *navigationController;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion1;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
@@ -161,7 +161,7 @@
 	[requestManager GET:finalUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		[[UserManager sharedInstance] createUser:responseObject];
     [self.locationManager startMonitoringForRegion:self.beaconRegion1];
-    [self.locationManager startMonitoringForRegion:self.beaconRegion2];
+    //[self.locationManager startMonitoringForRegion:self.beaconRegion2];
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"Error: %@", error);
 	}];
@@ -179,9 +179,8 @@
 	}];
 }
 
-- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification
-{
-  notification.applicationIconBadgeNumber = 0;
+- (void) application:(UIApplication *) application didReceiveLocalNotification:(UILocalNotification *) notification {
+  application.applicationIconBadgeNumber = 0;
 }
 
 -(void) sendLocalNotification: (NSString*) message{

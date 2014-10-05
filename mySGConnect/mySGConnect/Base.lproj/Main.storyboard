@@ -145,6 +145,31 @@
             </objects>
             <point key="canvasLocation" x="824" y="404"/>
         </scene>
+        <!--Validation Retrait View Controller-->
+        <scene sceneID="Pdf-JU-y9D">
+            <objects>
+                <viewController storyboardIdentifier="ValidationRetraitViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LGV-fg-r8G" customClass="ValidationRetraitViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s6w-JG-kYN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pensez à retirer votre argent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAo-gZ-VDl">
+                                <rect key="frame" x="0.0" y="106" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qml-nZ-Vwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1181" y="404"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AccueilScreen.jpg" width="640" height="1136"/>

@@ -9,6 +9,7 @@
 #import "RetraitViewController.h"
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ValidationRetraitViewController.h"
 #import <AFNetworking.h>
 #import "UserManager.h"
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -25,12 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 @property (weak, nonatomic) IBOutlet UIImageView *clavier;
+@property (assign, nonatomic) int pinSize;
 @property (weak, nonatomic) IBOutlet UILabel *actualBalance;
 
-@property (strong, nonatomic) NSNumber *pin;
-
 -(void) refreshLabel:(NSTimer *)timer;
-
+- (void) onDidTap:(UITapGestureRecognizer*) sender;
 @end
 
 @implementation RetraitViewController
@@ -50,8 +50,24 @@
 								   selector:@selector(refreshLabel:)
 								   userInfo:nil
 									repeats:YES];
-	//UITapGestureRecognizer *tap = [UITapGestureRecognizer alloc] initWithTarget:<#(id)#> action:<#(SEL)#>;
-	//self.clavier
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDidTap:)];
+	tap.delegate = self;
+	self.clavier.userInteractionEnabled = YES;
+	[self.clavier addGestureRecognizer:tap];
+	self.pinSize = 0;
+}
+
+- (void) onDidTap:(UITapGestureRecognizer*) sender{
+	self.pinSize++;
+	if (self.pinSize > 3){
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		ValidationRetraitViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ValidationRetraitViewController"];
+		[self dismissViewControllerAnimated:YES completion:^{
+			AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+			[appdelegate.navigationController presentViewController:vc animated:YES completion:nil];
+			
+		}];
+	}
 }
 
 -(void) refreshLabel: (NSTimer *)timer{

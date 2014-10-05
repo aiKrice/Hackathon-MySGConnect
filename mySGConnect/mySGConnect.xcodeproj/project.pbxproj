@@ -22,6 +22,7 @@
 		DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22E19E01E9C006E701F /* RetraitViewController.m */; };
 		DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23019E0210B006E701F /* CoreLocation.framework */; };
 		DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23219E02111006E701F /* CoreBluetooth.framework */; };
+		DA891BA519E0CAEF007B2718 /* ValidationRetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */; };
 		DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */; };
 		DAB1EDE319E0842700B91F93 /* wifi2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE019E0842700B91F93 /* wifi2@2x.png */; };
 		DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDE119E0842700B91F93 /* wifi3@2x.png */; };
@@ -63,6 +64,8 @@
 		DA27E22E19E01E9C006E701F /* RetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitViewController.m; sourceTree = "<group>"; };
 		DA27E23019E0210B006E701F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DA27E23219E02111006E701F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DA891BA319E0CAEF007B2718 /* ValidationRetraitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationRetraitViewController.h; sourceTree = "<group>"; };
+		DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationRetraitViewController.m; sourceTree = "<group>"; };
 		DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi1@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE019E0842700B91F93 /* wifi2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi2@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE119E0842700B91F93 /* wifi3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi3@2x.png"; sourceTree = "<group>"; };
@@ -130,12 +133,14 @@
 				DA27E20C19E01E16006E701F /* AppDelegate.m */,
 				DA27E20E19E01E16006E701F /* AccueilViewController.h */,
 				DA27E20F19E01E16006E701F /* AccueilViewController.m */,
+				DA27E22D19E01E9C006E701F /* RetraitViewController.h */,
+				DA27E22E19E01E9C006E701F /* RetraitViewController.m */,
+				DA891BA319E0CAEF007B2718 /* ValidationRetraitViewController.h */,
+				DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */,
 				DA27E21119E01E16006E701F /* Main.storyboard */,
 				DA27E21419E01E16006E701F /* Images.xcassets */,
 				DA27E21619E01E16006E701F /* LaunchScreen.xib */,
 				DA27E20719E01E16006E701F /* Supporting Files */,
-				DA27E22D19E01E9C006E701F /* RetraitViewController.h */,
-				DA27E22E19E01E9C006E701F /* RetraitViewController.m */,
 			);
 			path = mySGConnect;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE1C89D19E04BE400B77BB9 /* UserManager.m in Sources */,
+				DA891BA519E0CAEF007B2718 /* ValidationRetraitViewController.m in Sources */,
 				DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */,
 				DA27E21019E01E16006E701F /* AccueilViewController.m in Sources */,
 				DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */,
