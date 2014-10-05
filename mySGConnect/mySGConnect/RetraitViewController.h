@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RetraitViewController : UIViewController<UITextFieldDelegate>
+@interface RetraitViewController : UIViewController<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @end

@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, assign) CLProximity proximity;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 @end
 

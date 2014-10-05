@@ -15,7 +15,7 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) UINavigationController *navigationController;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion1;
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion2;
