@@ -10,6 +10,7 @@
 
 @interface AccueilViewController : UIViewController
 
+- (IBAction)programRetrait:(id)sender;
 
 @end
 

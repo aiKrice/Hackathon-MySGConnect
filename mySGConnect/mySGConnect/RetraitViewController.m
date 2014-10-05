@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
 @property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
 @property (weak, nonatomic) IBOutlet UIImageView *clavier;
+@property (weak, nonatomic) IBOutlet UILabel *sommeARetirer;
+@property (weak, nonatomic) IBOutlet UILabel *marcheDistributeur;
 @property (assign, nonatomic) int pinSize;
 @property (weak, nonatomic) IBOutlet UILabel *actualBalance;
 
@@ -38,6 +40,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  
+  self.sommeARetirer.hidden = YES;
+  self.marcheDistributeur.hidden = YES;
+  if ([[UserManager sharedInstance].retraitProgrammer isEqualToString:@"Oui"])
+  {
+    self.moneyInputTF.hidden = YES;
+    self.sommeARetirer.hidden = NO;
+    self.marcheDistributeur.hidden = NO;
+    [self.sommeARetirer setText:[NSString stringWithFormat:@"Somme à retirer : %@ €", [UserManager sharedInstance].programRetraituserBalance]];
+    self.moneyInputTF.text = [NSString stringWithFormat:@"%@", [UserManager sharedInstance].programRetraituserBalance];
+  }
   
   firstTime = false;
   errorAuthen = false;

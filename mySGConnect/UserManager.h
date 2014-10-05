@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSNumber *userBalance;
 @property (nonatomic, strong) NSString *cashoutDate;
 @property (nonatomic, strong) NSNumber *pinCode;
+@property (nonatomic, strong) NSString *retraitProgrammer;
+@property (nonatomic, strong) NSNumber *programRetraituserBalance;
 
 
 

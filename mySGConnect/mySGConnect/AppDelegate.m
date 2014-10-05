@@ -105,7 +105,6 @@
 			
 			[self.navigationController presentViewController:rvc animated:YES completion:nil];
 			[self sendLocalNotification:@"Bonjour et bienvenue à la societe generale" withData:nil];
-			
 			break;
 			
 		default:

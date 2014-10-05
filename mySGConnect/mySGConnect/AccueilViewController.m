@@ -7,6 +7,8 @@
 //
 
 #import "AccueilViewController.h"
+#import "UserManager.h"
+#import "RetraitProgrammerViewController.h"
 
 @interface AccueilViewController ()
 
@@ -16,6 +18,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+  [UserManager sharedInstance].retraitProgrammer = @"Non";
   self.navigationController.navigationBar.hidden = YES;
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -23,6 +26,14 @@
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+- (IBAction)programRetrait:(id)sender
+{
+  [UserManager sharedInstance].retraitProgrammer = @"Oui";
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		RetraitProgrammerViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"RetraitProgrammerViewController"];
+  [self.navigationController presentViewController:vc animated:YES completion:nil];
 }
 
 @end

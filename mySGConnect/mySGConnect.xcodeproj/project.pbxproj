@@ -11,6 +11,7 @@
 		8FEF053819E0B6E0007CEC03 /* AccueilScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */; };
 		8FEF053A19E0C599007CEC03 /* iPhone5s.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053919E0C599007CEC03 /* iPhone5s.jpg */; };
 		8FEF053C19E0CB33007CEC03 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053B19E0CB33007CEC03 /* background@2x.png */; };
+		8FEF053F19E0F221007CEC03 /* RetraitProgrammerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */; };
 		CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D265F9DB97BDA2EFDE967677 /* libPods.a */; };
 		DA27E20A19E01E16006E701F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20919E01E16006E701F /* main.m */; };
 		DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20C19E01E16006E701F /* AppDelegate.m */; };
@@ -46,6 +47,8 @@
 		8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccueilScreen.jpg; sourceTree = "<group>"; };
 		8FEF053919E0C599007CEC03 /* iPhone5s.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone5s.jpg; sourceTree = "<group>"; };
 		8FEF053B19E0CB33007CEC03 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		8FEF053D19E0F221007CEC03 /* RetraitProgrammerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetraitProgrammerViewController.h; sourceTree = "<group>"; };
+		8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitProgrammerViewController.m; sourceTree = "<group>"; };
 		B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D265F9DB97BDA2EFDE967677 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20419E01E16006E701F /* mySGConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mySGConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +143,8 @@
 				DA27E22E19E01E9C006E701F /* RetraitViewController.m */,
 				DA891BA319E0CAEF007B2718 /* ValidationRetraitViewController.h */,
 				DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */,
+				8FEF053D19E0F221007CEC03 /* RetraitProgrammerViewController.h */,
+				8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */,
 				DA27E21119E01E16006E701F /* Main.storyboard */,
 				DA27E21419E01E16006E701F /* Images.xcassets */,
 				DA27E21619E01E16006E701F /* LaunchScreen.xib */,
@@ -348,6 +353,7 @@
 				DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */,
 				DA27E21019E01E16006E701F /* AccueilViewController.m in Sources */,
 				DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */,
+				8FEF053F19E0F221007CEC03 /* RetraitProgrammerViewController.m in Sources */,
 				DA27E20A19E01E16006E701F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
