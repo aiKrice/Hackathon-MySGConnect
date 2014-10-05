@@ -12,9 +12,14 @@
 #import "ValidationRetraitViewController.h"
 #import <AFNetworking.h>
 #import "UserManager.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 
 
 @interface RetraitViewController ()
+{
+  BOOL firstTime;
+  BOOL errorAuthen;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *moneyInputTF;
 @property (weak, nonatomic) IBOutlet UIImageView *signalWeak;
@@ -33,6 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  
+  firstTime = false;
+  errorAuthen = false;
 	self.moneyInputTF.delegate = self;
   [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
   [self.actualBalance setText:[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userBalance]];
@@ -66,7 +74,8 @@
 	AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 	CLProximity proximity = appdelegate.proximity;
 	if (proximity == CLProximityImmediate){
-		[self displaySecureKeyboard];
+    [self promptTouchId];
+		
 		self.signalStrong.hidden = NO;
 	} else {
 		self.signalStrong.hidden = YES;
@@ -79,6 +88,67 @@
 		
 	}
 	
+}
+
+- (void)promptTouchId
+{
+  if (!firstTime)
+  {
+    LAContext *myContext = [[LAContext alloc] init];
+    NSError *authError = nil;
+    NSString *myLocalizedReasonString = @"Voulez-vous vous authentifier par empreinte digitale.";
+    UIAlertView *t = [[UIAlertView alloc] initWithTitle:@"TOTO" message:@"toto" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
+      
+      [myContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                localizedReason:myLocalizedReasonString
+                          reply:^(BOOL succes, NSError *error) {
+                            
+                            if (succes) {
+                              
+                              NSLog(@"User is authenticated successfully");
+                              [self RetraitRequete];
+                            } else {
+                              
+                              switch (error.code) {
+                                case LAErrorAuthenticationFailed:
+                                  NSLog(@"Authentication Failed");
+                                  break;
+                                  
+                                case LAErrorUserCancel:
+                                  NSLog(@"User pressed Cancel button");
+                                  errorAuthen = true;
+                                  break;
+                                  
+                                case LAErrorUserFallback:
+                                  NSLog(@"User pressed \"Enter Password\"");
+                                  errorAuthen = true;
+                                  break;
+                                  
+                                default:
+                                  NSLog(@"Touch ID is not configured");
+                                  errorAuthen = true;
+                                  break;
+                              }
+                              
+                              NSLog(@"Authentication Fails");
+                              errorAuthen = true;
+                              
+                            }
+                          }];
+    } else {
+      
+      NSLog(@"Can not evaluate Touch ID");
+      
+    }
+    
+    firstTime = true;
+
+  }
+  if (errorAuthen)
+  {
+    [self displaySecureKeyboard];
+  }
 }
 
 - (void)checkTextField:(id)sender
