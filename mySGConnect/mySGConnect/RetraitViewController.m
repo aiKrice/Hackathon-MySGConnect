@@ -97,7 +97,6 @@
     LAContext *myContext = [[LAContext alloc] init];
     NSError *authError = nil;
     NSString *myLocalizedReasonString = @"Voulez-vous vous authentifier par empreinte digitale.";
-    UIAlertView *t = [[UIAlertView alloc] initWithTitle:@"TOTO" message:@"toto" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
     if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
       
       [myContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
@@ -139,7 +138,7 @@
     } else {
       
       NSLog(@"Can not evaluate Touch ID");
-      
+      [self displaySecureKeyboard];
     }
     
     firstTime = true;
