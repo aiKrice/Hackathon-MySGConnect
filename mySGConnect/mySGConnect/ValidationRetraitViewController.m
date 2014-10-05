@@ -7,6 +7,7 @@
 //
 
 #import "ValidationRetraitViewController.h"
+#import "UserManager.h"
 
 @interface ValidationRetraitViewController ()
 
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  [self.thank setText:[NSString stringWithFormat:@"Merci %@ %@", [UserManager sharedInstance].userFirstName, [UserManager sharedInstance].userLastName]];
     // Do any additional setup after loading the view.
 }
 

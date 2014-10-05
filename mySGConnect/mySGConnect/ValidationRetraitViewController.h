@@ -10,4 +10,6 @@
 
 @interface ValidationRetraitViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *thank;
+
 @end
