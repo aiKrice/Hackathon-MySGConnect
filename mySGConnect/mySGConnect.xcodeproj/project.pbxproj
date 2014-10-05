@@ -18,7 +18,6 @@
 		DA27E21019E01E16006E701F /* AccueilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20F19E01E16006E701F /* AccueilViewController.m */; };
 		DA27E21319E01E16006E701F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA27E21119E01E16006E701F /* Main.storyboard */; };
 		DA27E21519E01E16006E701F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA27E21419E01E16006E701F /* Images.xcassets */; };
-		DA27E21819E01E16006E701F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA27E21619E01E16006E701F /* LaunchScreen.xib */; };
 		DA27E22419E01E16006E701F /* mySGConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22319E01E16006E701F /* mySGConnectTests.m */; };
 		DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22E19E01E9C006E701F /* RetraitViewController.m */; };
 		DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23019E0210B006E701F /* CoreLocation.framework */; };
@@ -60,7 +59,6 @@
 		DA27E20F19E01E16006E701F /* AccueilViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccueilViewController.m; sourceTree = "<group>"; };
 		DA27E21219E01E16006E701F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA27E21419E01E16006E701F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DA27E21719E01E16006E701F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DA27E21D19E01E16006E701F /* mySGConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mySGConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E22219E01E16006E701F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA27E22319E01E16006E701F /* mySGConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mySGConnectTests.m; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */,
 				DA27E21119E01E16006E701F /* Main.storyboard */,
 				DA27E21419E01E16006E701F /* Images.xcassets */,
-				DA27E21619E01E16006E701F /* LaunchScreen.xib */,
 				DA27E20719E01E16006E701F /* Supporting Files */,
 				DA891BA619E0DCEC007B2718 /* OfferViewController.h */,
 				DA891BA719E0DCEC007B2718 /* OfferViewController.m */,
@@ -292,7 +289,6 @@
 				DAB1EDE419E0842700B91F93 /* wifi3@2x.png in Resources */,
 				DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */,
 				DAB1EDE319E0842700B91F93 /* wifi2@2x.png in Resources */,
-				DA27E21819E01E16006E701F /* LaunchScreen.xib in Resources */,
 				DAB1EDE619E0BB0F00B91F93 /* clavier.png in Resources */,
 				8FEF053A19E0C599007CEC03 /* iPhone5s.jpg in Resources */,
 				8FEF053C19E0CB33007CEC03 /* background@2x.png in Resources */,
@@ -383,14 +379,6 @@
 				DA27E21219E01E16006E701F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DA27E21619E01E16006E701F /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA27E21719E01E16006E701F /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

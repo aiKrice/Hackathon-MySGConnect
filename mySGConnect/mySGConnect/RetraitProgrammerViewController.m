@@ -20,7 +20,7 @@
   
   self.moneyInputTF.delegate = self;
   [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userBalance]];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%@ €",[UserManager sharedInstance].userBalance]];
     // Do any additional setup after loading the view.
 }
 
@@ -32,7 +32,7 @@
 - (void)checkTextField:(id)sender
 {
   int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%d", displayBalance]];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%d €", displayBalance]];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -43,6 +43,7 @@
 
   return true;
 }
+
 
 /*
 #pragma mark - Navigation

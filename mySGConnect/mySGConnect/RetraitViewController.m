@@ -56,7 +56,7 @@
   errorAuthen = false;
 	self.moneyInputTF.delegate = self;
   [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%@",[UserManager sharedInstance].userBalance]];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%@ €",[UserManager sharedInstance].userBalance]];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
@@ -169,7 +169,7 @@
 - (void)checkTextField:(id)sender
 {
   int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%d", displayBalance]];
+  [self.actualBalance setText:[NSString stringWithFormat:@"%d €", displayBalance]];
 }
 
 - (void)didReceiveMemoryWarning {
