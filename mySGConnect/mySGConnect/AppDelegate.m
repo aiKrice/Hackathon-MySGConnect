@@ -53,9 +53,9 @@
 																 major:1
 																 minor:1
 															identifier:@"com.mysgconnnect"];
-	self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
+  //self.beaconRegion1.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion1.notifyOnEntry = TRUE;
-	self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
+  //self.beaconRegion2.notifyEntryStateOnDisplay  = TRUE;
 	self.beaconRegion2.notifyOnEntry = TRUE;
 	self.passageDictionnary = [[NSMutableDictionary alloc] init];
 
