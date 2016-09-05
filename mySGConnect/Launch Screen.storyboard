@@ -16,9 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wCR-TN-BCk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="wCR-TN-BCk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-cZ-f73">
+                                <rect key="frame" x="68" y="325" width="240" height="17"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smartphone-logo" translatesAutoresizingMaskIntoConstraints="NO" id="lzZ-fZ-nvo">
                                 <rect key="frame" x="163" y="310" width="49" height="47"/>
                             </imageView>
@@ -28,6 +32,11 @@
                             <constraint firstItem="lzZ-fZ-nvo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dtm-XC-JQI"/>
                             <constraint firstItem="lzZ-fZ-nvo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jKm-yH-Zkx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="lzZ-fZ-nvo"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -37,7 +46,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="414" height="737"/>
         <image name="smartphone-logo" width="49" height="47"/>
+        <image name="splash" width="414" height="737"/>
     </resources>
 </document>
