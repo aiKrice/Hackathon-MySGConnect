@@ -12,7 +12,7 @@
 		8FEF053A19E0C599007CEC03 /* iPhone5s.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053919E0C599007CEC03 /* iPhone5s.jpg */; };
 		8FEF053C19E0CB33007CEC03 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEF053B19E0CB33007CEC03 /* background@2x.png */; };
 		8FEF053F19E0F221007CEC03 /* RetraitProgrammerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */; };
-		CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D265F9DB97BDA2EFDE967677 /* libPods.a */; };
+		AFE92ADC9BE40080566547B2 /* libPods-mySGConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 997078480786A11C844E4784 /* libPods-mySGConnect.a */; };
 		DA27E20A19E01E16006E701F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20919E01E16006E701F /* main.m */; };
 		DA27E20D19E01E16006E701F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20C19E01E16006E701F /* AppDelegate.m */; };
 		DA27E21019E01E16006E701F /* AccueilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E20F19E01E16006E701F /* AccueilViewController.m */; };
@@ -22,6 +22,7 @@
 		DA27E22F19E01E9C006E701F /* RetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA27E22E19E01E9C006E701F /* RetraitViewController.m */; };
 		DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23019E0210B006E701F /* CoreLocation.framework */; };
 		DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA27E23219E02111006E701F /* CoreBluetooth.framework */; };
+		DA50B7271D7D78D4008150A5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA50B7261D7D78D4008150A5 /* Launch Screen.storyboard */; };
 		DA891BA519E0CAEF007B2718 /* ValidationRetraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */; };
 		DA891BA819E0DCEC007B2718 /* OfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA891BA719E0DCEC007B2718 /* OfferViewController.m */; };
 		DAB1EDE219E0842700B91F93 /* wifi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB1EDDF19E0842700B91F93 /* wifi1@2x.png */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AADF1267D1A54A8CBC99FD6 /* Pods-mySGConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mySGConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mySGConnect/Pods-mySGConnect.debug.xcconfig"; sourceTree = "<group>"; };
 		8FE1C89B19E0447200B77BB9 /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = ../UserManager.h; sourceTree = "<group>"; };
 		8FE1C89C19E0447200B77BB9 /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = ../UserManager.m; sourceTree = "<group>"; };
 		8FEF053719E0B6E0007CEC03 /* AccueilScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccueilScreen.jpg; sourceTree = "<group>"; };
@@ -48,8 +50,8 @@
 		8FEF053B19E0CB33007CEC03 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		8FEF053D19E0F221007CEC03 /* RetraitProgrammerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetraitProgrammerViewController.h; sourceTree = "<group>"; };
 		8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitProgrammerViewController.m; sourceTree = "<group>"; };
-		B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D265F9DB97BDA2EFDE967677 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		91324805B878076F9511DBD0 /* Pods-mySGConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mySGConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-mySGConnect/Pods-mySGConnect.release.xcconfig"; sourceTree = "<group>"; };
+		997078480786A11C844E4784 /* libPods-mySGConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mySGConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20419E01E16006E701F /* mySGConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mySGConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA27E20819E01E16006E701F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA27E20919E01E16006E701F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		DA27E22E19E01E9C006E701F /* RetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetraitViewController.m; sourceTree = "<group>"; };
 		DA27E23019E0210B006E701F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DA27E23219E02111006E701F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		DA50B7261D7D78D4008150A5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DA891BA319E0CAEF007B2718 /* ValidationRetraitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationRetraitViewController.h; sourceTree = "<group>"; };
 		DA891BA419E0CAEF007B2718 /* ValidationRetraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationRetraitViewController.m; sourceTree = "<group>"; };
 		DA891BA619E0DCEC007B2718 /* OfferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferViewController.h; sourceTree = "<group>"; };
@@ -74,7 +77,6 @@
 		DAB1EDE019E0842700B91F93 /* wifi2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi2@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE119E0842700B91F93 /* wifi3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wifi3@2x.png"; sourceTree = "<group>"; };
 		DAB1EDE519E0BB0F00B91F93 /* clavier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clavier.png; sourceTree = "<group>"; };
-		E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,7 @@
 			files = (
 				DA27E23319E02111006E701F /* CoreBluetooth.framework in Frameworks */,
 				DA27E23119E0210B006E701F /* CoreLocation.framework in Frameworks */,
-				CF5F4A20AB4EC5DBB21BF532 /* libPods.a in Frameworks */,
+				AFE92ADC9BE40080566547B2 /* libPods-mySGConnect.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,11 +100,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A63410AA11B104406803C257 /* Pods */ = {
+		324081C11E17F6A511634879 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */,
-				B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */,
+				0AADF1267D1A54A8CBC99FD6 /* Pods-mySGConnect.debug.xcconfig */,
+				91324805B878076F9511DBD0 /* Pods-mySGConnect.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -113,8 +115,8 @@
 				DA27E20619E01E16006E701F /* mySGConnect */,
 				DA27E22019E01E16006E701F /* mySGConnectTests */,
 				DA27E20519E01E16006E701F /* Products */,
-				A63410AA11B104406803C257 /* Pods */,
 				DBA08AE9939945AD7F76E790 /* Frameworks */,
+				324081C11E17F6A511634879 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +146,7 @@
 				8FEF053D19E0F221007CEC03 /* RetraitProgrammerViewController.h */,
 				8FEF053E19E0F221007CEC03 /* RetraitProgrammerViewController.m */,
 				DA27E21119E01E16006E701F /* Main.storyboard */,
+				DA50B7261D7D78D4008150A5 /* Launch Screen.storyboard */,
 				DA27E21419E01E16006E701F /* Images.xcassets */,
 				DA27E20719E01E16006E701F /* Supporting Files */,
 				DA891BA619E0DCEC007B2718 /* OfferViewController.h */,
@@ -197,7 +200,7 @@
 			children = (
 				DA27E23219E02111006E701F /* CoreBluetooth.framework */,
 				DA27E23019E0210B006E701F /* CoreLocation.framework */,
-				D265F9DB97BDA2EFDE967677 /* libPods.a */,
+				997078480786A11C844E4784 /* libPods-mySGConnect.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,11 +212,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA27E22719E01E16006E701F /* Build configuration list for PBXNativeTarget "mySGConnect" */;
 			buildPhases = (
-				43E29498A02825DD8F2B34C7 /* Check Pods Manifest.lock */,
+				9EC22DD1E9373DE0801CCAC4 /* [CP] Check Pods Manifest.lock */,
 				DA27E20019E01E16006E701F /* Sources */,
 				DA27E20119E01E16006E701F /* Frameworks */,
 				DA27E20219E01E16006E701F /* Resources */,
-				0CB38D0057FDF52684052776 /* Copy Pods Resources */,
+				862F0216A8F12CB600346165 /* [CP] Embed Pods Frameworks */,
+				1540E41BB8E01F587C55F284 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,7 +252,7 @@
 		DA27E1FC19E01E16006E701F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = teamSGAdviser;
 				TargetAttributes = {
 					DA27E20319E01E16006E701F = {
@@ -292,6 +296,7 @@
 				DAB1EDE619E0BB0F00B91F93 /* clavier.png in Resources */,
 				8FEF053A19E0C599007CEC03 /* iPhone5s.jpg in Resources */,
 				8FEF053C19E0CB33007CEC03 /* background@2x.png in Resources */,
+				DA50B7271D7D78D4008150A5 /* Launch Screen.storyboard in Resources */,
 				DA27E21519E01E16006E701F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,29 +311,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CB38D0057FDF52684052776 /* Copy Pods Resources */ = {
+		1540E41BB8E01F587C55F284 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mySGConnect/Pods-mySGConnect-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		43E29498A02825DD8F2B34C7 /* Check Pods Manifest.lock */ = {
+		862F0216A8F12CB600346165 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mySGConnect/Pods-mySGConnect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EC22DD1E9373DE0801CCAC4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,10 +408,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -408,6 +424,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -435,10 +452,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -475,29 +488,31 @@
 		};
 		DA27E22819E01E16006E701F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E390D5EFF5523359D9E3D521 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 0AADF1267D1A54A8CBC99FD6 /* Pods-mySGConnect.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = mySGConnect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamSGAdviser.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		DA27E22919E01E16006E701F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3551566277C9B7F68FCE599 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 91324805B878076F9511DBD0 /* Pods-mySGConnect.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = mySGConnect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamSGAdviser.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -515,6 +530,7 @@
 				);
 				INFOPLIST_FILE = mySGConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamSGAdviser.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mySGConnect.app/mySGConnect";
 			};
@@ -530,6 +546,7 @@
 				);
 				INFOPLIST_FILE = mySGConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.teamSGAdviser.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mySGConnect.app/mySGConnect";
 			};

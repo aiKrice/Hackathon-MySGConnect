@@ -11,6 +11,8 @@
 
 @interface ValidationRetraitViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *thank;
+
 @end
 
 @implementation ValidationRetraitViewController

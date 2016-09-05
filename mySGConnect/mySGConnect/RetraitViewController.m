@@ -16,47 +16,43 @@
 
 
 @interface RetraitViewController ()
-{
-  BOOL firstTime;
-  BOOL errorAuthen;
-}
 
-@property (weak, nonatomic) IBOutlet UITextField *moneyInputTF;
-@property (weak, nonatomic) IBOutlet UIImageView *signalWeak;
-@property (weak, nonatomic) IBOutlet UIImageView *signalNormal;
-@property (weak, nonatomic) IBOutlet UIImageView *signalStrong;
-@property (weak, nonatomic) IBOutlet UIImageView *clavier;
-@property (weak, nonatomic) IBOutlet UILabel *sommeARetirer;
-@property (weak, nonatomic) IBOutlet UILabel *marcheDistributeur;
-@property (assign, nonatomic) int pinSize;
-@property (weak, nonatomic) IBOutlet UILabel *actualBalance;
+@property (weak, nonatomic) IBOutlet UITextField	*moneyInputTF;
+@property (weak, nonatomic) IBOutlet UIImageView	*signalWeak;
+@property (weak, nonatomic) IBOutlet UIImageView	*signalNormal;
+@property (weak, nonatomic) IBOutlet UIImageView	*signalStrong;
+@property (weak, nonatomic) IBOutlet UIImageView	*clavier;
+@property (weak, nonatomic) IBOutlet UILabel		*sommeARetirer;
+@property (weak, nonatomic) IBOutlet UILabel		*marcheDistributeur;
+@property (assign, nonatomic) int					pinSize;
+@property (assign, nonatomic) BOOL					firstTime;
+@property (assign, nonatomic) BOOL					errorAuthen;
+@property (weak, nonatomic) IBOutlet UILabel		*actualBalance;
 
--(void) refreshImageBeacon:(NSTimer *)timer;
-- (void) onDidTap:(UITapGestureRecognizer*) sender;
 @end
 
 @implementation RetraitViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-  
-  self.sommeARetirer.hidden = YES;
-  self.marcheDistributeur.hidden = YES;
-  if ([[UserManager sharedInstance].retraitProgrammer isEqualToString:@"Oui"])
-  {
-    self.moneyInputTF.hidden = YES;
-    self.sommeARetirer.hidden = NO;
-    self.marcheDistributeur.hidden = NO;
-    [self.sommeARetirer setText:[NSString stringWithFormat:@"Somme à retirer : %@ €", [UserManager sharedInstance].programRetraituserBalance]];
-    self.moneyInputTF.text = [NSString stringWithFormat:@"%@", [UserManager sharedInstance].programRetraituserBalance];
-  }
-  
-  firstTime = false;
-  errorAuthen = false;
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+	
+	self.sommeARetirer.hidden = YES;
+	self.marcheDistributeur.hidden = YES;
+	if ([[UserManager sharedInstance].retraitProgrammer isEqualToString:@"Oui"])
+	{
+		self.moneyInputTF.hidden = YES;
+		self.sommeARetirer.hidden = NO;
+		self.marcheDistributeur.hidden = NO;
+		[self.sommeARetirer setText:[NSString stringWithFormat:@"Somme à retirer : %@ €", [UserManager sharedInstance].programRetraituserBalance]];
+		self.moneyInputTF.text = [NSString stringWithFormat:@"%@", [UserManager sharedInstance].programRetraituserBalance];
+	}
+	
+	self.firstTime = NO;
+	self.errorAuthen = NO;
 	self.moneyInputTF.delegate = self;
-  [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%@ €",[UserManager sharedInstance].userBalance]];
+	[self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
+	[self.actualBalance setText:[NSString stringWithFormat:@"%@ €",[UserManager sharedInstance].userBalance]];
 	
 	[NSTimer scheduledTimerWithTimeInterval:1
 									 target:self
@@ -75,12 +71,8 @@
 	if (self.pinSize > 3){
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 		ValidationRetraitViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ValidationRetraitViewController"];
-		[self dismissViewControllerAnimated:YES completion:^{
-			[self RetraitRequete];
-			AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-			[appdelegate.navigationController presentViewController:vc animated:YES completion:nil];
-			
-		}];
+		[self RetraitRequete];
+		[self.navigationController pushViewController:vc animated:YES];
 	}
 }
 
@@ -88,7 +80,7 @@
 	AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 	CLProximity proximity = appdelegate.proximity;
 	if (proximity == CLProximityImmediate){
-    [self promptTouchId];
+		[self promptTouchId];
 		
 		self.signalStrong.hidden = NO;
 	} else {
@@ -108,73 +100,73 @@
 
 - (void)promptTouchId
 {
-  if (!firstTime)
-  {
-    LAContext *myContext = [[LAContext alloc] init];
-    NSError *authError = nil;
-    NSString *myLocalizedReasonString = @"Voulez-vous vous authentifier par empreinte digitale.";
-    if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
-      
-      [myContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                localizedReason:myLocalizedReasonString
-                          reply:^(BOOL succes, NSError *error) {
-                            
-                            if (succes) {
-                              
-                              NSLog(@"User is authenticated successfully");
-                              [self RetraitRequete];
-                            } else {
-                              
-                              switch (error.code) {
-                                case LAErrorAuthenticationFailed:
-                                  NSLog(@"Authentication Failed");
-                                  break;
-                                  
-                                case LAErrorUserCancel:
-                                  NSLog(@"User pressed Cancel button");
-                                  errorAuthen = true;
-                                  break;
-                                  
-                                case LAErrorUserFallback:
-                                  NSLog(@"User pressed \"Enter Password\"");
-                                  errorAuthen = true;
-                                  break;
-                                  
-                                default:
-                                  NSLog(@"Touch ID is not configured");
-                                  errorAuthen = true;
-                                  break;
-                              }
-                              
-                              NSLog(@"Authentication Fails");
-                              errorAuthen = true;
-                              
-                            }
-                          }];
-    } else {
-      
-      NSLog(@"Can not evaluate Touch ID");
-      [self displaySecureKeyboard];
-    }
-    
-    firstTime = true;
-
-  }
-  if (errorAuthen)
-  {
-    [self displaySecureKeyboard];
-  }
+	if (!self.firstTime)
+	{
+		LAContext *myContext = [[LAContext alloc] init];
+		NSError *authError = nil;
+		NSString *myLocalizedReasonString = @"Voulez-vous vous authentifier par empreinte digitale.";
+		if ([myContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
+			
+			[myContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+					  localizedReason:myLocalizedReasonString
+								reply:^(BOOL succes, NSError *error) {
+									
+									if (succes) {
+										
+										NSLog(@"User is authenticated successfully");
+										[self RetraitRequete];
+									} else {
+										
+										switch (error.code) {
+											case LAErrorAuthenticationFailed:
+												NSLog(@"Authentication Failed");
+												break;
+												
+											case LAErrorUserCancel:
+												NSLog(@"User pressed Cancel button");
+												self.errorAuthen = true;
+												break;
+												
+											case LAErrorUserFallback:
+												NSLog(@"User pressed \"Enter Password\"");
+												self.errorAuthen = true;
+												break;
+												
+											default:
+												NSLog(@"Touch ID is not configured");
+												self.errorAuthen = true;
+												break;
+										}
+										
+										NSLog(@"Authentication Fails");
+										self.errorAuthen = true;
+										
+									}
+								}];
+		} else {
+			
+			NSLog(@"Can not evaluate Touch ID");
+			[self displaySecureKeyboard];
+		}
+		
+		self.firstTime = true;
+		
+	}
+	if (self.errorAuthen)
+	{
+		[self displaySecureKeyboard];
+	}
 }
 
 - (void)checkTextField:(id)sender
 {
-  int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
-  [self.actualBalance setText:[NSString stringWithFormat:@"%d €", displayBalance]];
+	int displayBalance = (uint32_t)[[UserManager sharedInstance].userBalance integerValue] - (uint32_t)[self.moneyInputTF.text integerValue];
+	[self.actualBalance setText:[NSString stringWithFormat:@"%d €", displayBalance]];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
 
 -(void) displaySecureKeyboard{
@@ -183,22 +175,23 @@
 
 - (void)RetraitRequete
 {
-  NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
-  AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+	/*NSString *baseURL = @"http://10.18.197.199:8888/ibeacon/user.php?";
+  AFHTTPSessionManager *requestManager = [AFHTTPSessionManager manager];
   
   int newBalance = [self calculateNewBalanceWith:[UserManager sharedInstance].userBalance andActualMoney:self.moneyInputTF.text];
   NSNumber *balanceTosend = [[NSNumber alloc] initWithInt:newBalance];
-  [requestManager GET:baseURL parameters:@{@"method":@"retrait", @"email":@"saez@sg.com", @"balance":balanceTosend} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	 requestManager
+	 [requestManager GET:baseURL parameters:@{@"method":@"retrait", @"email":@"saez@sg.com", @"balance":balanceTosend} success:^(AFHTTPRequestOperation *operation, id responseObject) {
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-  }];
+	 NSLog(@"Error: %@", error);
+  }];*/
 }
 
 - (int)calculateNewBalanceWith:(NSNumber *)userBalance andActualMoney:(NSString *)money
 {
-  int newMoney = (uint32_t)[money integerValue];
-  int newBalance = (uint32_t)[userBalance integerValue] - newMoney;
-  return newBalance;
+	int newMoney = (uint32_t)[money integerValue];
+	int newBalance = (uint32_t)[userBalance integerValue] - newMoney;
+	return newBalance;
 }
 
 -(void) removeSecureKeyboard{
@@ -206,14 +199,14 @@
 	
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
 	[textField resignFirstResponder];

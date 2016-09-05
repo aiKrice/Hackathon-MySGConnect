@@ -8,8 +8,9 @@
 
 #import "RetraitProgrammerViewController.h"
 #import "UserManager.h"
+#define rgb(r, g, b) [UIColor colorWithRed:(float)r / 255.0 green:(float)g / 255.0 blue:(float)b / 255.0 alpha:1.0]
 
-@interface RetraitProgrammerViewController ()
+@interface RetraitProgrammerViewController ()<UIAlertViewDelegate>
 
 @end
 
@@ -22,6 +23,17 @@
   [self.moneyInputTF addTarget:self action:@selector(checkTextField:) forControlEvents:UIControlEventEditingChanged];
   [self.actualBalance setText:[NSString stringWithFormat:@"%@ €",[UserManager sharedInstance].userBalance]];
     // Do any additional setup after loading the view.
+	
+	
+	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(didClose)];
+	self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+	self.navigationController.navigationBar.translucent = NO;
+	self.navigationController.navigationBar.barTintColor = rgb(229, 74, 77);
+}
+
+
+-(void) didClose{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,14 +48,16 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-  UIAlertView *programmer = [[UIAlertView alloc] initWithTitle:@"Retrait Enregistrer" message:[NSString stringWithFormat:@"Votre retrait de %@ euros à bien été programmé. Vous pouvez vous rendre à un distributeur. Le retrait sera valable pendant 30 minutes.", self.moneyInputTF.text] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+  UIAlertView *programmer = [[UIAlertView alloc] initWithTitle:@"Retrait Enregistrer" message:[NSString stringWithFormat:@"Votre retrait de %@ euros à bien été programmé. Vous pouvez vous rendre à un distributeur. Le retrait sera valable pendant 30 minutes.", self.moneyInputTF.text] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
   [programmer show];
-  [UserManager sharedInstance].programRetraituserBalance = [NSNumber numberWithInt:(uint32_t)[self.moneyInputTF.text integerValue]];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [UserManager sharedInstance].programRetraituserBalance = [NSNumber numberWithInteger:[self.moneyInputTF.text integerValue]];
 
   return true;
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

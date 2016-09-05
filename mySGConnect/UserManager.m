@@ -35,13 +35,13 @@
 
 - (void)createUser:(NSDictionary *)userInfoDictionnary
 {
-  self.userLastName = [userInfoDictionnary objectForKey:@"lastname"];
-  self.userFirstName = [userInfoDictionnary objectForKey:@"firstname"];
-  self.userEmail = [userInfoDictionnary objectForKey:@"email"];
-  self.userId = [userInfoDictionnary objectForKey:@"idUSER"];
-  self.userBalance = [NSNumber numberWithInt:[[userInfoDictionnary objectForKey:@"balance"] intValue]];
-  self.cashoutDate = [userInfoDictionnary objectForKey:@"datederetrait"];
-  self.pinCode = [NSNumber numberWithInt:[[userInfoDictionnary objectForKey:@"PINCODE"] intValue]];
+  self.userLastName = @"Saez";
+  self.userFirstName = @"Christopher";
+  self.userEmail = @"christopher.saez@yopmail.com";
+  self.userId = @"123456";
+  self.userBalance = [NSNumber numberWithInt:100];
+  self.cashoutDate = @"20 juillet 2014";
+  self.pinCode = [NSNumber numberWithInt:1234];
 }
 
 @end
